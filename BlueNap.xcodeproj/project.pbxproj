@@ -9,16 +9,41 @@
 /* Begin PBXBuildFile section */
 		A1B2C3D4E5F6000000000005 /* BlueNapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */; };
 		A1B2C3D4E5F6000000000007 /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6000000000006 /* BluetoothController.swift */; };
+		A1B2C3D4E5F600000000000F /* BluetoothServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600000000000E /* BluetoothServices.swift */; };
 		A1B2C3D4E5F600000000000D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600000000000C /* SettingsView.swift */; };
 		A1B2C3D4E5F6000000000003 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000002 /* LaunchAtLogin */; };
+		B1C2D3E4F5A6000000000002 /* BlueNapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A6000000000001 /* BlueNapTests.swift */; };
+		C1D2E3F4A5B6000000000002 /* BlueNapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D2E3F4A5B6000000000001 /* BlueNapUITests.swift */; };
 		4F229AC0243CC29600B1784C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F229ABF243CC29600B1784C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1C2D3E4F5A6000000000006 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F229AB2243CC29500B1784C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F229AB9243CC29500B1784C;
+			remoteInfo = BlueNap;
+		};
+		C1D2E3F4A5B6000000000006 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F229AB2243CC29500B1784C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F229AB9243CC29500B1784C;
+			remoteInfo = BlueNap;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4F229ABA243CC29500B1784C /* BlueNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueNapApp.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6000000000006 /* BluetoothController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothController.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F600000000000E /* BluetoothServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothServices.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F600000000000C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B1C2D3E4F5A6000000000001 /* BlueNapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueNapTests.swift; sourceTree = "<group>"; };
+		B1C2D3E4F5A6000000000003 /* BlueNapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueNapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1D2E3F4A5B6000000000001 /* BlueNapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueNapUITests.swift; sourceTree = "<group>"; };
+		C1D2E3F4A5B6000000000003 /* BlueNapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueNapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F229ABF243CC29600B1784C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F229AC4243CC29600B1784C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F229AC5243CC29600B1784C /* BlueNap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueNap.entitlements; sourceTree = "<group>"; };
@@ -35,6 +60,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1C2D3E4F5A6000000000009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1D2E3F4A5B6000000000009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -42,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				4F229ABC243CC29500B1784C /* BlueNap */,
+				B1C2D3E4F5A6000000000004 /* BlueNapTests */,
+				C1D2E3F4A5B6000000000004 /* BlueNapUITests */,
 				4F229ABB243CC29500B1784C /* Products */,
 				4FDC9C0D243DCB7B00FB0C4E /* Frameworks */,
 			);
@@ -51,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				4F229ABA243CC29500B1784C /* BlueNap.app */,
+				B1C2D3E4F5A6000000000003 /* BlueNapTests.xctest */,
+				C1D2E3F4A5B6000000000003 /* BlueNapUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +103,7 @@
 			children = (
 				A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */,
 				A1B2C3D4E5F6000000000006 /* BluetoothController.swift */,
+				A1B2C3D4E5F600000000000E /* BluetoothServices.swift */,
 				A1B2C3D4E5F600000000000C /* SettingsView.swift */,
 				4F229ABF243CC29600B1784C /* Assets.xcassets */,
 				4F229AC4243CC29600B1784C /* Info.plist */,
@@ -67,6 +111,22 @@
 				4F229ACB243CC72800B1784C /* BlueNap-Bridging-Header.h */,
 			);
 			path = BlueNap;
+			sourceTree = "<group>";
+		};
+		B1C2D3E4F5A6000000000004 /* BlueNapTests */ = {
+			isa = PBXGroup;
+			children = (
+				B1C2D3E4F5A6000000000001 /* BlueNapTests.swift */,
+			);
+			path = BlueNapTests;
+			sourceTree = "<group>";
+		};
+		C1D2E3F4A5B6000000000004 /* BlueNapUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C1D2E3F4A5B6000000000001 /* BlueNapUITests.swift */,
+			);
+			path = BlueNapUITests;
 			sourceTree = "<group>";
 		};
 		4FDC9C0D243DCB7B00FB0C4E /* Frameworks */ = {
@@ -101,6 +161,42 @@
 			productReference = 4F229ABA243CC29500B1784C /* BlueNap.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B1C2D3E4F5A6000000000005 /* BlueNapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1C2D3E4F5A600000000000F /* Build configuration list for PBXNativeTarget "BlueNapTests" */;
+			buildPhases = (
+				B1C2D3E4F5A6000000000008 /* Sources */,
+				B1C2D3E4F5A6000000000009 /* Frameworks */,
+				B1C2D3E4F5A600000000000A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1C2D3E4F5A6000000000007 /* PBXTargetDependency */,
+			);
+			name = BlueNapTests;
+			productName = BlueNapTests;
+			productReference = B1C2D3E4F5A6000000000003 /* BlueNapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C1D2E3F4A5B6000000000005 /* BlueNapUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1D2E3F4A5B600000000000F /* Build configuration list for PBXNativeTarget "BlueNapUITests" */;
+			buildPhases = (
+				C1D2E3F4A5B6000000000008 /* Sources */,
+				C1D2E3F4A5B6000000000009 /* Frameworks */,
+				C1D2E3F4A5B600000000000A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C1D2E3F4A5B6000000000007 /* PBXTargetDependency */,
+			);
+			name = BlueNapUITests;
+			productName = BlueNapUITests;
+			productReference = C1D2E3F4A5B6000000000003 /* BlueNapUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -114,6 +210,14 @@
 				TargetAttributes = {
 					4F229AB9243CC29500B1784C = {
 						CreatedOnToolsVersion = 11.1;
+					};
+					B1C2D3E4F5A6000000000005 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 4F229AB9243CC29500B1784C;
+					};
+					C1D2E3F4A5B6000000000005 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 4F229AB9243CC29500B1784C;
 					};
 				};
 			};
@@ -133,6 +237,8 @@
 			projectRoot = "";
 			targets = (
 				4F229AB9243CC29500B1784C /* BlueNap */,
+				B1C2D3E4F5A6000000000005 /* BlueNapTests */,
+				C1D2E3F4A5B6000000000005 /* BlueNapUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -143,6 +249,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F229AC0243CC29600B1784C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1C2D3E4F5A600000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1D2E3F4A5B600000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,11 +296,41 @@
 			files = (
 				A1B2C3D4E5F6000000000005 /* BlueNapApp.swift in Sources */,
 				A1B2C3D4E5F6000000000007 /* BluetoothController.swift in Sources */,
+				A1B2C3D4E5F600000000000F /* BluetoothServices.swift in Sources */,
 				A1B2C3D4E5F600000000000D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1C2D3E4F5A6000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1C2D3E4F5A6000000000002 /* BlueNapTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1D2E3F4A5B6000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1D2E3F4A5B6000000000002 /* BlueNapUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B1C2D3E4F5A6000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F229AB9243CC29500B1784C /* BlueNap */;
+			targetProxy = B1C2D3E4F5A6000000000006 /* PBXContainerItemProxy */;
+		};
+		C1D2E3F4A5B6000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F229AB9243CC29500B1784C /* BlueNap */;
+			targetProxy = C1D2E3F4A5B6000000000006 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4F229AC6243CC29600B1784C /* Debug */ = {
@@ -235,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -291,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -351,6 +501,76 @@
 			};
 			name = Release;
 		};
+		B1C2D3E4F5A600000000000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueNap.app/Contents/MacOS/BlueNap";
+				TEST_TARGET_NAME = BlueNap;
+			};
+			name = Debug;
+		};
+		B1C2D3E4F5A600000000000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueNap.app/Contents/MacOS/BlueNap";
+				TEST_TARGET_NAME = BlueNap;
+			};
+			name = Release;
+		};
+		C1D2E3F4A5B600000000000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = BlueNap;
+			};
+			name = Debug;
+		};
+		C1D2E3F4A5B600000000000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = BlueNap;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -368,6 +588,24 @@
 			buildConfigurations = (
 				4F229AC9243CC29600B1784C /* Debug */,
 				4F229ACA243CC29600B1784C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1C2D3E4F5A600000000000F /* Build configuration list for PBXNativeTarget "BlueNapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1C2D3E4F5A600000000000B /* Debug */,
+				B1C2D3E4F5A600000000000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1D2E3F4A5B600000000000F /* Build configuration list for PBXNativeTarget "BlueNapUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1D2E3F4A5B600000000000B /* Debug */,
+				C1D2E3F4A5B600000000000C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

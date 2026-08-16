@@ -14,10 +14,26 @@ final class BluetoothController {
 
     private static let disconnectOnSleepKey = "disconnectOnSleepDevices"
 
+    private let powerController: BluetoothPowerControlling
+    private let deviceConnector: BluetoothDeviceConnecting
+    private let userDefaults: UserDefaults
+    private let runAsync: (@escaping () -> Void) -> Void
     private var observers: [NSObjectProtocol] = []
     private var disconnectedAtSleep: [String] = []
 
-    private init() {}
+    init(
+        powerController: BluetoothPowerControlling = IOBluetoothPowerController(),
+        deviceConnector: BluetoothDeviceConnecting = IOBluetoothDeviceConnector(),
+        userDefaults: UserDefaults = .standard,
+        runAsync: @escaping (@escaping () -> Void) -> Void = { work in
+            DispatchQueue.global().async(execute: work)
+        }
+    ) {
+        self.powerController = powerController
+        self.deviceConnector = deviceConnector
+        self.userDefaults = userDefaults
+        self.runAsync = runAsync
+    }
 
     func debugLog(_ message: String) {
         let line = "\(Date()) \(message)\n"
@@ -41,7 +57,7 @@ final class BluetoothController {
     // MARK: - Device selection
 
     var selectedDeviceAddresses: [String] {
-        UserDefaults.standard.stringArray(forKey: Self.disconnectOnSleepKey) ?? []
+        userDefaults.stringArray(forKey: Self.disconnectOnSleepKey) ?? []
     }
 
     func setSelected(_ address: String, isSelected: Bool) {
@@ -53,7 +69,7 @@ final class BluetoothController {
         } else {
             selection.removeAll { $0 == address }
         }
-        UserDefaults.standard.set(selection, forKey: Self.disconnectOnSleepKey)
+        userDefaults.set(selection, forKey: Self.disconnectOnSleepKey)
     }
 
     func pairedDevices() -> [PairedDevice] {
@@ -83,7 +99,7 @@ final class BluetoothController {
         ]
     }
 
-    private func handlePowerDown() {
+    func handlePowerDown() {
         let selection = selectedDeviceAddresses
         if selection.isEmpty {
             debugLog("sleep: powering off Bluetooth")
@@ -95,12 +111,12 @@ final class BluetoothController {
         }
     }
 
-    private func handlePowerUp() {
+    func handlePowerUp() {
         setPower(on: true)
         let devices = disconnectedAtSleep
         disconnectedAtSleep = []
         guard !devices.isEmpty else { return }
-        DispatchQueue.global().async { [weak self] in
+        runAsync { [weak self] in
             self?.debugLog("wake: reconnecting devices \(devices)")
             self?.reconnect(devices: devices)
         }
@@ -109,19 +125,15 @@ final class BluetoothController {
     private func disconnect(devices: [String]) {
         for address in devices {
             debugLog("disconnect: \(address)")
-            device(withAddress: address)?.closeConnection()
         }
+        deviceConnector.disconnect(devices)
     }
 
     private func reconnect(devices: [String]) {
         for address in devices {
             debugLog("reconnect: \(address)")
-            device(withAddress: address)?.openConnection()
         }
-    }
-
-    private func device(withAddress address: String) -> IOBluetoothDevice? {
-        pairedDevices().first { $0.addressString == address }
+        deviceConnector.reconnect(devices)
     }
 
     private func pairedDevices() -> [IOBluetoothDevice] {
@@ -130,6 +142,6 @@ final class BluetoothController {
 
     private func setPower(on: Bool) {
         debugLog("setPower: \(on)")
-        IOBluetoothPreferenceSetControllerPowerState(on ? 1 : 0)
+        powerController.setPower(on: on)
     }
 }

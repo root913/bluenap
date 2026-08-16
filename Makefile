@@ -14,7 +14,7 @@ APP_BUNDLE = $(BUILD_DIR)/Build/Products/$(CONFIGURATION)/$(APP_NAME).app
 # Extra signing flags when a development team is configured locally
 SIGNING_FLAGS = $(if $(DEVELOPMENT_TEAM),DEVELOPMENT_TEAM=$(DEVELOPMENT_TEAM) CODE_SIGN_IDENTITY="$(CODE_SIGN_IDENTITY)")
 
-.PHONY: all build install clean
+.PHONY: all build test install clean
 
 # Default target
 all: build install
@@ -28,6 +28,17 @@ build:
 		-derivedDataPath $(BUILD_DIR) \
 		$(SIGNING_FLAGS) \
 		build
+
+# Run unit tests
+test:
+	@echo "🧪 Testing $(APP_NAME)..."
+	xcodebuild -project $(APP_NAME).xcodeproj \
+		-scheme $(SCHEME) \
+		-configuration Debug \
+		-destination 'platform=macOS' \
+		-derivedDataPath $(BUILD_DIR) \
+		$(SIGNING_FLAGS) \
+		test
 
 # Install to /Applications
 install:

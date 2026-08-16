@@ -21,9 +21,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var settingsObserver: NSObjectProtocol?
     private var statusItemObserver: NSObjectProtocol?
 
+    private var isUITestMode: Bool {
+        ProcessInfo.processInfo.environment["UITEST_MODE"] == "1"
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if ProcessInfo.processInfo.arguments.contains("--uitest-reset-defaults") {
+            UserDefaults.standard.removeObject(forKey: "hideIcon")
+            UserDefaults.standard.removeObject(forKey: "disconnectOnSleepDevices")
+        }
+
         BluetoothController.shared.debugLog("app did finish launching")
-        BluetoothController.shared.start()
+        if !isUITestMode {
+            BluetoothController.shared.start()
+        }
 
         settingsObserver = NotificationCenter.default.addObserver(
             forName: NSWindow.willCloseNotification, object: nil, queue: .main
@@ -48,6 +59,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         guard !UserDefaults.standard.bool(forKey: "hideIcon") else { return }
         installStatusItem()
+
+        if ProcessInfo.processInfo.arguments.contains("--uitest-open-settings") {
+            DispatchQueue.main.async { [weak self] in
+                self?.openSettings()
+            }
+        }
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

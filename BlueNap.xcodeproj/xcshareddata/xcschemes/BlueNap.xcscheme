@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B1C2D3E4F5A6000000000005"
+               BuildableName = "BlueNapTests.xctest"
+               BlueprintName = "BlueNapTests"
+               ReferencedContainer = "container:BlueNap.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C1D2E3F4A5B6000000000005"
+               BuildableName = "BlueNapUITests.xctest"
+               BlueprintName = "BlueNapUITests"
+               ReferencedContainer = "container:BlueNap.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
