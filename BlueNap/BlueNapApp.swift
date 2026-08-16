@@ -54,6 +54,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard statusItem == nil else { return true }
         UserDefaults.standard.set(false, forKey: "hideIcon")
         installStatusItem()
+        NotificationCenter.default.post(name: .statusItemVisibilityChanged, object: true)
         openSettings()
         return true
     }

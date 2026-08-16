@@ -46,6 +46,14 @@ struct SettingsView: View {
         .frame(width: 380)
         .padding()
         .onAppear(perform: reload)
+        .onAppear {
+            showMenuBarIcon = !UserDefaults.standard.bool(forKey: "hideIcon")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .statusItemVisibilityChanged)) { notification in
+            if let isVisible = notification.object as? Bool {
+                showMenuBarIcon = isVisible
+            }
+        }
         .toolbar {
             Button("Refresh") {
                 reload()
