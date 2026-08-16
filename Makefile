@@ -4,9 +4,15 @@ SCHEME = BlueNap
 CONFIGURATION = Release
 BUILD_DIR = ./build
 
+# Local overrides (e.g. DEVELOPMENT_TEAM) go in Makefile.local (git-ignored)
+-include Makefile.local
+
 # Installation paths
 INSTALL_DIR = /Applications
 APP_BUNDLE = $(BUILD_DIR)/Build/Products/$(CONFIGURATION)/$(APP_NAME).app
+
+# Extra signing flags when a development team is configured locally
+SIGNING_FLAGS = $(if $(DEVELOPMENT_TEAM),DEVELOPMENT_TEAM=$(DEVELOPMENT_TEAM) CODE_SIGN_IDENTITY="$(CODE_SIGN_IDENTITY)")
 
 .PHONY: all build install clean
 
@@ -20,6 +26,7 @@ build:
 		-scheme $(SCHEME) \
 		-configuration $(CONFIGURATION) \
 		-derivedDataPath $(BUILD_DIR) \
+		$(SIGNING_FLAGS) \
 		build
 
 # Install to /Applications
