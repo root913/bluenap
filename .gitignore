@@ -1,2 +1,4 @@
 xcuserdata/
-Carthage
+.build/
+build/
+DerivedData/

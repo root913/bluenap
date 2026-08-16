@@ -7,48 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F229ABE243CC29500B1784C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F229ABD243CC29500B1784C /* AppDelegate.swift */; };
+		A1B2C3D4E5F6000000000005 /* BlueNapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */; };
+		A1B2C3D4E5F6000000000007 /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6000000000006 /* BluetoothController.swift */; };
+		A1B2C3D4E5F600000000000D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600000000000C /* SettingsView.swift */; };
+		A1B2C3D4E5F6000000000003 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F6000000000002 /* LaunchAtLogin */; };
 		4F229AC0243CC29600B1784C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F229ABF243CC29600B1784C /* Assets.xcassets */; };
-		4F229AC3243CC29600B1784C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F229AC1243CC29600B1784C /* MainMenu.xib */; };
-		4FDC9C13243DCC0300FB0C4E /* LaunchAtLogin.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FDC9C12243DCC0300FB0C4E /* LaunchAtLogin.framework.dSYM */; };
-		4FDC9C14243DCC6B00FB0C4E /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDC9C0E243DCB7B00FB0C4E /* LaunchAtLogin.framework */; };
-		4FDC9C15243DCC6B00FB0C4E /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDC9C0E243DCB7B00FB0C4E /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4FDC9C0C243DCB0B00FB0C4E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				4FDC9C13243DCC0300FB0C4E /* LaunchAtLogin.framework.dSYM in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4FDC9C16243DCC6B00FB0C4E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4FDC9C15243DCC6B00FB0C4E /* LaunchAtLogin.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		4F229ABA243CC29500B1784C /* Bluesnooze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bluesnooze.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F229ABD243CC29500B1784C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4F229ABA243CC29500B1784C /* BlueNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueNapApp.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6000000000006 /* BluetoothController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothController.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F600000000000C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4F229ABF243CC29600B1784C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4F229AC2243CC29600B1784C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4F229AC4243CC29600B1784C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F229AC5243CC29600B1784C /* Bluesnooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bluesnooze.entitlements; sourceTree = "<group>"; };
-		4F229ACB243CC72800B1784C /* Bluesnooze-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bluesnooze-Bridging-Header.h"; sourceTree = "<group>"; };
-		4FDC9C0E243DCB7B00FB0C4E /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
-		4FDC9C12243DCC0300FB0C4E /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = LaunchAtLogin.framework.dSYM; path = Carthage/Build/Mac/LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
+		4F229AC5243CC29600B1784C /* BlueNap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueNap.entitlements; sourceTree = "<group>"; };
+		4F229ACB243CC72800B1784C /* BlueNap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueNap-Bridging-Header.h"; sourceTree = "<group>"; };
+		A1B2C3D4E5F6000000000008 /* LaunchAtLogin */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin; path = LaunchAtLogin; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FDC9C14243DCC6B00FB0C4E /* LaunchAtLogin.framework in Frameworks */,
+				A1B2C3D4E5F6000000000003 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +41,7 @@
 		4F229AB1243CC29500B1784C = {
 			isa = PBXGroup;
 			children = (
-				4F229ABC243CC29500B1784C /* Bluesnooze */,
+				4F229ABC243CC29500B1784C /* BlueNap */,
 				4F229ABB243CC29500B1784C /* Products */,
 				4FDC9C0D243DCB7B00FB0C4E /* Frameworks */,
 			);
@@ -75,29 +50,29 @@
 		4F229ABB243CC29500B1784C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F229ABA243CC29500B1784C /* Bluesnooze.app */,
+				4F229ABA243CC29500B1784C /* BlueNap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F229ABC243CC29500B1784C /* Bluesnooze */ = {
+		4F229ABC243CC29500B1784C /* BlueNap */ = {
 			isa = PBXGroup;
 			children = (
-				4F229ABD243CC29500B1784C /* AppDelegate.swift */,
+				A1B2C3D4E5F6000000000004 /* BlueNapApp.swift */,
+				A1B2C3D4E5F6000000000006 /* BluetoothController.swift */,
+				A1B2C3D4E5F600000000000C /* SettingsView.swift */,
 				4F229ABF243CC29600B1784C /* Assets.xcassets */,
-				4F229AC1243CC29600B1784C /* MainMenu.xib */,
 				4F229AC4243CC29600B1784C /* Info.plist */,
-				4F229AC5243CC29600B1784C /* Bluesnooze.entitlements */,
-				4F229ACB243CC72800B1784C /* Bluesnooze-Bridging-Header.h */,
+				4F229AC5243CC29600B1784C /* BlueNap.entitlements */,
+				4F229ACB243CC72800B1784C /* BlueNap-Bridging-Header.h */,
 			);
-			path = Bluesnooze;
+			path = BlueNap;
 			sourceTree = "<group>";
 		};
 		4FDC9C0D243DCB7B00FB0C4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4FDC9C12243DCC0300FB0C4E /* LaunchAtLogin.framework.dSYM */,
-				4FDC9C0E243DCB7B00FB0C4E /* LaunchAtLogin.framework */,
+				A1B2C3D4E5F6000000000008 /* LaunchAtLogin */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,25 +80,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4F229AB9243CC29500B1784C /* Bluesnooze */ = {
+		4F229AB9243CC29500B1784C /* BlueNap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F229AC8243CC29600B1784C /* Build configuration list for PBXNativeTarget "Bluesnooze" */;
+			buildConfigurationList = 4F229AC8243CC29600B1784C /* Build configuration list for PBXNativeTarget "BlueNap" */;
 			buildPhases = (
 				4F707EAE243DC8DA00CBAE8A /* ShellScript */,
 				4F229AB6243CC29500B1784C /* Sources */,
 				4F229AB7243CC29500B1784C /* Frameworks */,
 				4F229AB8243CC29500B1784C /* Resources */,
-				4FDC9C0C243DCB0B00FB0C4E /* CopyFiles */,
-				4FDC9C16243DCC6B00FB0C4E /* Embed Frameworks */,
-				4FDC9C11243DCBD700FB0C4E /* Run Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Bluesnooze;
-			productName = Bluesnooze;
-			productReference = 4F229ABA243CC29500B1784C /* Bluesnooze.app */;
+			name = BlueNap;
+			packageProductDependencies = (
+				A1B2C3D4E5F6000000000002 /* LaunchAtLogin */,
+			);
+			productName = BlueNap;
+			productReference = 4F229ABA243CC29500B1784C /* BlueNap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -133,30 +108,31 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1430;
-				ORGANIZATIONNAME = "Oliver Peate";
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				ORGANIZATIONNAME = root913;
 				TargetAttributes = {
 					4F229AB9243CC29500B1784C = {
 						CreatedOnToolsVersion = 11.1;
-						LastSwiftMigration = 1110;
 					};
 				};
 			};
-			buildConfigurationList = 4F229AB5243CC29500B1784C /* Build configuration list for PBXProject "Bluesnooze" */;
+			buildConfigurationList = 4F229AB5243CC29500B1784C /* Build configuration list for PBXProject "BlueNap" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 4F229AB1243CC29500B1784C;
+			packageReferences = (
+				A1B2C3D4E5F6000000000001 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = 4F229ABB243CC29500B1784C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F229AB9243CC29500B1784C /* Bluesnooze */,
+				4F229AB9243CC29500B1784C /* BlueNap */,
 			);
 		};
 /* End PBXProject section */
@@ -167,7 +143,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F229AC0243CC29600B1784C /* Assets.xcassets in Resources */,
-				4F229AC3243CC29600B1784C /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,25 +167,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		4FDC9C11243DCBD700FB0C4E /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Carthage/Build/Mac/LaunchAtLogin.framework/Resources/copy-helper.sh\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -218,22 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F229ABE243CC29500B1784C /* AppDelegate.swift in Sources */,
+				A1B2C3D4E5F6000000000005 /* BlueNapApp.swift in Sources */,
+				A1B2C3D4E5F6000000000007 /* BluetoothController.swift in Sources */,
+				A1B2C3D4E5F600000000000D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4F229AC1243CC29600B1784C /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F229AC2243CC29600B1784C /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4F229AC6243CC29600B1784C /* Debug */ = {
@@ -288,7 +235,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -344,7 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -358,26 +305,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Bluesnooze/Bluesnooze.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BlueNap/BlueNap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7X3FR535W8;
+				DEVELOPMENT_TEAM = XNK459NR7B;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = Bluesnooze/Info.plist;
+				INFOPLIST_FILE = BlueNap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oliverpeate.Bluesnooze;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.root913.bluenap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Bluesnooze/Bluesnooze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlueNap/BlueNap-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -388,26 +331,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Bluesnooze/Bluesnooze.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BlueNap/BlueNap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7X3FR535W8;
+				DEVELOPMENT_TEAM = XNK459NR7B;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				INFOPLIST_FILE = Bluesnooze/Info.plist;
+				INFOPLIST_FILE = BlueNap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oliverpeate.Bluesnooze;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.root913.bluenap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Bluesnooze/Bluesnooze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlueNap/BlueNap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -415,7 +354,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F229AB5243CC29500B1784C /* Build configuration list for PBXProject "Bluesnooze" */ = {
+		4F229AB5243CC29500B1784C /* Build configuration list for PBXProject "BlueNap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F229AC6243CC29600B1784C /* Debug */,
@@ -424,7 +363,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F229AC8243CC29600B1784C /* Build configuration list for PBXNativeTarget "Bluesnooze" */ = {
+		4F229AC8243CC29600B1784C /* Build configuration list for PBXNativeTarget "BlueNap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F229AC9243CC29600B1784C /* Debug */,
@@ -434,6 +373,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1B2C3D4E5F6000000000001 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B2C3D4E5F6000000000002 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4E5F6000000000001 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4F229AB2243CC29500B1784C /* Project object */;
 }

@@ -1,70 +1,64 @@
-![Bluesnooze logo](images/icon.png)
+![BlueNap logo](images/icon.png)
 
-# Bluesnooze
+# BlueNap
 
-[Download the latest release][download-latest] or install via Homebrew:
-
-```sh
-brew install bluesnooze
-```
-
-Please note the latest release requires MacOS Monterey (12.0) or higher.
-
-## Enjoying Bluesnooze? ❤️
-
-Perhaps you could [buy me a coffee](https://www.buymeacoffee.com/odlp) to say thanks :coffee:
-
-## About
-
-**Bluesnooze prevents your sleeping Mac from connecting to Bluetooth accessories.**
+**BlueNap prevents your sleeping Mac from connecting to Bluetooth accessories.**
 
 If you pair Bluetooth headphones or speakers with both your phone & Mac it can be frustrating when your sleeping Mac connects intermittently and disrupts the audio.
 
-With Bluesnooze the Bluetooth connection is switched off when your Mac sleeps, and switched on when your Mac wakes.
+With BlueNap the Bluetooth connection is switched off when your Mac sleeps, and switched on when your Mac wakes.
 
-![Screenshot showing Bluesnooze in the status bar](images/screenshot.png)
+*BlueNap is a fork of [Bluesnooze](https://github.com/odm/Bluesnooze) by [Oliver Drobnik](https://github.com/odm), modernized (SwiftUI, Swift Package Manager, native menu, Settings window) and extended with a "Disconnect on sleep" feature. Licensed under the MIT License (see `LICENSE`).*
 
-You might also want to check-out Whisper –  [the volume limiter for MacOS](https://apps.apple.com/gb/app/whisper-volume-limiter/id1438132944?mt=12).
+![Screenshot showing BlueNap in the status bar](images/screenshot.png)
+
+![Screenshot showing the BlueNap settings window](images/screenshot-settings.png)
+
+## Requirements
+
+- macOS 13 (Ventura) or higher
 
 ## Installation
 
-1. Download `Bluesnooze.zip` from the [latest release][download-latest]
-1. In Finder, open `Bluesnooze.zip` in your `Downloads` directory
-1. Drag `Bluesnooze.app` to your `Applications` directory
-1. *Optional*: Configure 'Launch at login'
+1. Build the release (`make all`), or grab a build from [Releases](https://github.com/root913/bluesnooze/releases/latest)
+1. Open `BlueNap.app` in your `Applications` directory
+1. *Optional*: Enable 'Launch at login' from the Settings window
 
 ## Caveats
 
-- Please note this app is not compatible with the “Allow your Apple Watch to unlock your Mac” feature.
-- Unfortunately this app can't be distributed via the App Store because it uses a private API to switch Bluetooth on/off (but the release version is notarized by Apple).
+- This app is not compatible with the "Allow your Apple Watch to unlock your Mac" feature.
+- This app can't be distributed via the App Store because it uses a private API to switch Bluetooth on/off.
 
-[download-latest]: https://github.com/odlp/bluesnooze/releases/latest
+## How it works
+
+BlueNap listens for the macOS sleep/wake notifications and toggles Bluetooth power via the private `IOBluetoothPreferenceSetControllerPowerState` API. It runs as a menu bar app (SwiftUI).
+
+When you select devices under **Settings → Disconnect on sleep**, those devices are disconnected (instead of Bluetooth being powered off) when your Mac sleeps, and reconnected when it wakes.
 
 ## FAQs
 
-### Can you add support for selectively disconnecting certain devices?
+### Can I disconnect only some devices on sleep?
 
-Bluesnooze is a really simple app which toggles the Bluetooth power on/off.
-Disconnecting specific devices would require a complete rewrite, and I don't
-need this functionality or the complexity it brings. Please feel free to fork &
-experiment as you like ✌️
+Yes — open **Settings** and tick the devices to disconnect when your Mac sleeps. When at least one device is selected, Bluetooth stays on and only the selected devices are disconnected; if no device is selected, BlueNap falls back to switching Bluetooth off entirely.
 
-### How can I hide the Bluesnooze icon?
+Note: some devices (e.g. headphones) may reconnect to a sleeping Mac on their own, so selective disconnection is best-effort for auto-reconnecting hardware.
+
+### How can I hide the BlueNap icon?
 
 In your terminal run the following command:
 
 ```sh
-defaults write com.oliverpeate.Bluesnooze hideIcon -bool true && killall Bluesnooze
+defaults write dev.root913.bluenap hideIcon -bool true && killall BlueNap
 ```
 
 When you next relaunch the application there should be no icon in the menu bar.
 
-### How can I restore the Bluesnooze icon?
+### How can I restore the BlueNap icon?
 
 In your terminal run the following command:
 
 ```sh
-defaults delete com.oliverpeate.Bluesnooze hideIcon && killall Bluesnooze
+defaults delete dev.root913.bluenap hideIcon && killall BlueNap
 ```
 
 When you next relaunch the application it should appear in the menu bar.

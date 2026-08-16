@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bluesnooze.png",
+      "filename" : "bluenap.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bluesnooze@2x.png",
+      "filename" : "bluenap@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bluesnooze@3x.png",
+      "filename" : "bluenap@3x.png",
       "scale" : "3x"
     }
   ],

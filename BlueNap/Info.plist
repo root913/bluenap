@@ -27,9 +27,9 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2020 Oliver Peate. All rights reserved.</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
+	<string>Copyright © 2026 root913.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>BlueNap turns Bluetooth on when you wake your Mac and off when it sleeps.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticTermination</key>
