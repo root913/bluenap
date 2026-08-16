@@ -6,6 +6,7 @@ struct SettingsView: View {
     @State private var showMenuBarIcon = !UserDefaults.standard.bool(forKey: "hideIcon")
     @State private var devices: [PairedDevice] = []
     @State private var selected: Set<String> = []
+    @State private var isRefreshing = false
 
     var body: some View {
         Form {
@@ -22,7 +23,7 @@ struct SettingsView: View {
                     )
                 }
 
-            Section("Disconnect on sleep") {
+            Section {
                 if devices.isEmpty {
                     Text("No paired devices")
                         .foregroundStyle(.secondary)
@@ -40,6 +41,27 @@ struct SettingsView: View {
                         }
                     }
                 }
+            } header: {
+                HStack {
+                    Text("Disconnect on sleep")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Button {
+                        refresh()
+                    } label: {
+                        if isRefreshing {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    }
+                    .buttonStyle(IconButtonStyle())
+                    .disabled(isRefreshing)
+                    .help("Refresh device list")
+                    .accessibilityLabel("Refresh device list")
+                }
             }
         }
         .formStyle(.grouped)
@@ -54,10 +76,14 @@ struct SettingsView: View {
                 showMenuBarIcon = isVisible
             }
         }
-        .toolbar {
-            Button("Refresh") {
-                reload()
-            }
+    }
+
+    private func refresh() {
+        guard !isRefreshing else { return }
+        isRefreshing = true
+        reload()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            isRefreshing = false
         }
     }
 
@@ -78,5 +104,22 @@ struct SettingsView: View {
                 BluetoothController.shared.setSelected(device.address, isSelected: isOn)
             }
         )
+    }
+}
+
+private struct IconButtonStyle: ButtonStyle {
+    @State private var isHovering = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(isHovering ? Color.accentColor : Color.secondary)
+            .padding(4)
+            .background(isHovering ? Color.primary.opacity(0.1) : Color.clear)
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+            .scaleEffect(configuration.isPressed ? 0.9 : 1)
+            .animation(.easeInOut(duration: 0.15), value: isHovering)
+            .onHover { hovering in
+                isHovering = hovering
+            }
     }
 }
