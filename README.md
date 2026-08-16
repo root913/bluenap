@@ -45,17 +45,19 @@ Note: some devices (e.g. headphones) may reconnect to a sleeping Mac on their ow
 
 ### How can I hide the BlueNap icon?
 
-In your terminal run the following command:
+Open **Settings** and untick "Show menu bar icon". The icon disappears immediately.
+
+You can also hide it from the terminal:
 
 ```sh
 defaults write io.github.root913.bluenap hideIcon -bool true && killall BlueNap
 ```
 
-When you next relaunch the application there should be no icon in the menu bar.
-
 ### How can I restore the BlueNap icon?
 
-In your terminal run the following command:
+The icon is the only way to open Settings, so if you hid it from there, simply launch BlueNap again (`open -a BlueNap`); the icon is restored and Settings opens.
+
+You can also restore it from the terminal:
 
 ```sh
 defaults delete io.github.root913.bluenap hideIcon && killall BlueNap

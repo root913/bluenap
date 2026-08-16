@@ -1,6 +1,10 @@
 import AppKit
 import SwiftUI
 
+extension Notification.Name {
+    static let statusItemVisibilityChanged = Notification.Name("statusItemVisibilityChanged")
+}
+
 @main
 struct BlueNapApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
@@ -15,6 +19,7 @@ struct BlueNapApp: App {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
     private var settingsObserver: NSObjectProtocol?
+    private var statusItemObserver: NSObjectProtocol?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         BluetoothController.shared.debugLog("app did finish launching")
@@ -30,14 +35,43 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
-        guard !UserDefaults.standard.bool(forKey: "hideIcon") else { return }
+        statusItemObserver = NotificationCenter.default.addObserver(
+            forName: .statusItemVisibilityChanged, object: nil, queue: .main
+        ) { [weak self] notification in
+            guard let show = notification.object as? Bool else { return }
+            if show {
+                self?.installStatusItem()
+            } else {
+                self?.removeStatusItem()
+            }
+        }
 
+        guard !UserDefaults.standard.bool(forKey: "hideIcon") else { return }
+        installStatusItem()
+    }
+
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        guard statusItem == nil else { return true }
+        UserDefaults.standard.set(false, forKey: "hideIcon")
+        installStatusItem()
+        openSettings()
+        return true
+    }
+
+    private func installStatusItem() {
+        guard statusItem == nil else { return }
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         let image = NSImage(named: "bluenap")
         image?.isTemplate = true
         statusItem.button?.image = image
         statusItem.menu = buildMenu()
         self.statusItem = statusItem
+    }
+
+    private func removeStatusItem() {
+        guard let statusItem else { return }
+        NSStatusBar.system.removeStatusItem(statusItem)
+        self.statusItem = nil
     }
 
     private func buildMenu() -> NSMenu {

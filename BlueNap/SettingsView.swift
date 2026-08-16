@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
+    @State private var showMenuBarIcon = !UserDefaults.standard.bool(forKey: "hideIcon")
     @State private var devices: [PairedDevice] = []
     @State private var selected: Set<String> = []
 
@@ -11,6 +12,14 @@ struct SettingsView: View {
             Toggle("Launch at login", isOn: $launchAtLogin)
                 .onChange(of: launchAtLogin) { isEnabled in
                     LaunchAtLogin.isEnabled = isEnabled
+                }
+
+            Toggle("Show menu bar icon", isOn: $showMenuBarIcon)
+                .onChange(of: showMenuBarIcon) { isVisible in
+                    UserDefaults.standard.set(!isVisible, forKey: "hideIcon")
+                    NotificationCenter.default.post(
+                        name: .statusItemVisibilityChanged, object: isVisible
+                    )
                 }
 
             Section("Disconnect on sleep") {
