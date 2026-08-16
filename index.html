@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlueNap — Bluetooth that knows when to quiet down</title>
+<meta name="description" content="BlueNap switches your Mac's Bluetooth off the moment it sleeps, and back on the moment it wakes — so your headphones stay locked to your phone.">
+<link rel="icon" href="https://raw.githubusercontent.com/root913/bluenap/main/images/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1220;
+    --bg-panel:#111b30;
+    --bg-panel-2:#0e1729;
+    --ink:#ecf0f7;
+    --ink-dim:#8c96ac;
+    --ink-faint:#5c667e;
+    --cyan:#7fd8e8;
+    --cyan-dim:rgba(127,216,232,0.35);
+    --amber:#f2a65c;
+    --amber-dim:rgba(242,166,92,0.35);
+    --flat:#3a4358;
+    --line:rgba(236,240,247,0.08);
+    --line-strong:rgba(236,240,247,0.14);
+    --radius:14px;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(127,216,232,0.08), transparent 60%),
+      radial-gradient(900px 500px at 90% 0%, rgba(242,166,92,0.06), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  ::selection{background:var(--cyan-dim); color:var(--ink);}
+
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:flex;
+    align-items:center;
+    gap:0.55em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 8px 1px var(--cyan-dim);
+  }
+
+  p{color:var(--ink-dim); margin:0.9em 0 0;}
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  code, .mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* ---------- NAV ---------- */
+  nav.topbar{
+    position:sticky; top:0; z-index:40;
+    backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(11,18,32,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  nav.topbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem;}
+  .brand img{width:24px; height:24px; border-radius:6px; display:block;}
+  .navlinks{display:flex; align-items:center; gap:28px; font-size:0.88rem; color:var(--ink-dim);}
+  .navlinks a{text-decoration:none; transition:color .15s ease;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ink);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 16px; border-radius:999px;
+    font-size:0.85rem; font-weight:500;
+    text-decoration:none; border:1px solid var(--line-strong);
+    color:var(--ink);
+    transition:border-color .15s ease, background .15s ease, transform .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--cyan-dim); transform:translateY(-1px);}
+  .btn:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+  .btn-solid{
+    background:linear-gradient(180deg, #93e2ef, var(--cyan));
+    color:#0b1220; border:none; font-weight:600;
+  }
+  .btn-solid:hover{filter:brightness(1.06);}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:88px 0 40px; position:relative; overflow:hidden;}
+  .hero-inner{max-width:760px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.4vw, 4rem);
+    line-height:1.05;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--cyan);
+    font-weight:500;
+  }
+  .hero p.lede{
+    font-size:clamp(1.02rem, 1.6vw, 1.18rem);
+    max-width:52ch;
+    margin-top:20px;
+    color:var(--ink-dim);
+  }
+  .hero-ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero-meta{
+    margin-top:22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    display:flex; gap:18px; flex-wrap:wrap;
+  }
+
+  /* ---------- TRACE (signature element) ---------- */
+  .trace-wrap{
+    margin-top:64px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+    padding:0;
+    overflow:hidden;
+    position:relative;
+  }
+  .trace-header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    letter-spacing:0.04em;
+  }
+  .trace-header .dots{display:flex; gap:6px;}
+  .trace-header .dots span{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .trace-svg{display:block; width:100%; height:auto;}
+  .trace-labels{
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    border-top:1px solid var(--line);
+  }
+  .trace-labels div{
+    padding:14px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    text-align:center;
+  }
+  .trace-labels div:not(:last-child){border-right:1px solid var(--line);}
+  .trace-labels strong{display:block; color:var(--ink); font-size:0.8rem; margin-bottom:2px; font-weight:500;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .playhead{animation:sweep 7s linear infinite;}
+    .pulse-glow{animation:glow 7s linear infinite;}
+  }
+  @keyframes sweep{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(1180px);}
+  }
+  @keyframes glow{
+    0%, 26%{opacity:1;}
+    27%, 63%{opacity:0.15;}
+    64%, 100%{opacity:1;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  section.tight{padding:64px 0;}
+  .section-head{max-width:620px; margin-bottom:52px;}
+  .section-head h2{font-size:clamp(1.7rem, 3vw, 2.3rem); margin-top:14px;}
+  .divider{border:none; border-top:1px solid var(--line); margin:0;}
+
+  /* Problem */
+  .problem-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  .problem-copy p{font-size:1.02rem; max-width:44ch;}
+  .device-swap{
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--bg-panel);
+    padding:28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+  }
+  .swap-row{display:flex; align-items:center; justify-content:space-between; padding:12px 0;}
+  .swap-row:not(:last-child){border-bottom:1px dashed var(--line);}
+  .tag{
+    font-size:0.68rem; padding:3px 9px; border-radius:999px; border:1px solid var(--line-strong);
+    color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .tag.on{color:var(--cyan); border-color:var(--cyan-dim);}
+  .tag.off{color:var(--ink-faint);}
+
+  /* How it works */
+  .states{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .state{background:var(--bg-panel); padding:32px 28px;}
+  .state .glyph{width:34px; height:34px; margin-bottom:22px;}
+  .state h3{font-size:1.15rem; font-weight:600;}
+  .state p{font-size:0.92rem;}
+  .state.mid{background:var(--bg-panel-2);}
+
+  /* Feature callout w/ screenshot */
+  .feature-grid{display:grid; grid-template-columns:0.95fr 1.05fr; gap:64px; align-items:center;}
+  .feature-grid.reverse{grid-template-columns:1.05fr 0.95fr;}
+  .feature-grid.reverse .shot-col{order:-1;}
+  .shot-frame{
+    border-radius:12px; border:1px solid var(--line-strong);
+    background:var(--bg-panel);
+    padding:10px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .shot-frame img{width:100%; display:block; border-radius:6px; border:1px solid var(--line);}
+
+  /* cropped menu-bar screenshot: the source file is a full-desktop capture
+     (2202x310) — window into just the BlueNap icon + open dropdown at native
+     resolution, since object-fit:cover would rescale and blur the crop. */
+  .crop-window{
+    width:470px; max-width:100%;
+    aspect-ratio:470/220;
+    overflow:hidden;
+    border-radius:6px; border:1px solid var(--line);
+    position:relative;
+    margin:0 auto;
+    background:var(--bg-panel-2);
+  }
+  .crop-window img{
+    position:absolute; top:0; left:0;
+    width:2202px; max-width:none; height:auto;
+    transform:translateX(-530px);
+    border:none; border-radius:0;
+  }
+  .shot-caption{
+    margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:var(--ink-faint); text-align:center;
+  }
+  .feature-list{list-style:none; margin:22px 0 0; padding:0; display:grid; gap:14px;}
+  .feature-list li{
+    display:flex; gap:12px; font-size:0.92rem; color:var(--ink-dim);
+  }
+  .feature-list li::before{
+    content:"—"; color:var(--amber); flex-shrink:0; font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* Install */
+  .install-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  .steps{list-style:none; margin:0; padding:0; counter-reset:step;}
+  .steps li{
+    counter-increment:step;
+    display:grid; grid-template-columns:34px 1fr; gap:16px;
+    padding:18px 0;
+  }
+  .steps li:not(:last-child){border-bottom:1px solid var(--line);}
+  .steps li::before{
+    content:counter(step);
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--cyan);
+    font-size:0.85rem;
+    border:1px solid var(--cyan-dim);
+    border-radius:50%;
+    width:30px; height:30px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps h4{margin:0 0 4px; font-family:'Inter'; font-weight:600; font-size:0.96rem; color:var(--ink);}
+  .steps p{margin:0; font-size:0.88rem;}
+
+  .terminal{
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:#0a1120; overflow:hidden;
+  }
+  .terminal .tbar{
+    padding:10px 16px; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:8px;
+  }
+  .terminal .tbar span{width:9px; height:9px; border-radius:50%; background:var(--line-strong);}
+  .terminal .tbar small{margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-faint);}
+  .terminal pre{
+    margin:0; padding:18px 20px; font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem; color:var(--ink-dim); overflow-x:auto; line-height:1.7;
+  }
+  .terminal pre .cmt{color:var(--ink-faint);}
+  .terminal pre .accent{color:var(--cyan);}
+
+  .caveats{
+    margin-top:28px; padding:18px 20px;
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--bg-panel);
+  }
+  .caveats .eyebrow{color:var(--amber);}
+  .caveats .eyebrow::before{background:var(--amber); box-shadow:0 0 8px 1px var(--amber-dim);}
+  .caveats ul{margin:12px 0 0; padding-left:18px; color:var(--ink-dim); font-size:0.88rem;}
+  .caveats li{margin-top:6px;}
+
+  /* FAQ */
+  .faq{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    cursor:pointer; list-style:none; padding:22px 0;
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem;
+    color:var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+"; font-family:'IBM Plex Mono', monospace; color:var(--cyan);
+    font-size:1.1rem; transition:transform .2s ease;
+  }
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item .faq-body{padding:0 0 24px; max-width:60ch;}
+  .faq-item .faq-body p{font-size:0.94rem;}
+
+  /* Footer CTA */
+  .cta-band{
+    border:1px solid var(--line); border-radius:20px;
+    background:linear-gradient(135deg, rgba(127,216,232,0.09), rgba(242,166,92,0.06));
+    padding:56px 48px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+  }
+  .cta-band h2{font-size:clamp(1.5rem, 3vw, 2rem);}
+  .cta-band .ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line); padding:40px 0; margin-top:20px;}
+  footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+  footer p{margin:0; font-size:0.82rem; color:var(--ink-faint);}
+  footer .flinks{display:flex; gap:20px; font-size:0.82rem; color:var(--ink-faint);}
+  footer .flinks a{text-decoration:none; transition:color .15s ease;}
+  footer .flinks a:hover{color:var(--ink);}
+
+  @media (max-width: 860px){
+    .problem-grid, .feature-grid, .feature-grid.reverse, .install-grid{
+      grid-template-columns:1fr; gap:36px;
+    }
+    .feature-grid.reverse .shot-col{order:0;}
+    .states{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+    section{padding:64px 0;}
+    .cta-band{padding:36px 26px; flex-direction:column; align-items:flex-start;}
+    .trace-labels{grid-template-columns:1fr;}
+    .trace-labels div:not(:last-child){border-right:none; border-bottom:1px solid var(--line);}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="#" class="brand">
+      <img src="https://raw.githubusercontent.com/root913/bluenap/main/images/icon.png" alt="">
+      BlueNap
+    </a>
+    <div class="navlinks">
+      <a href="#how-it-works">How it works</a>
+      <a href="#feature">Selective disconnect</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-solid" href="https://github.com/root913/bluenap/releases/latest">Download</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <p class="eyebrow">Menu bar utility for macOS 13+</p>
+      <h1>Bluetooth that knows when to <em>quiet down.</em></h1>
+      <p class="lede">BlueNap switches your Mac's Bluetooth off the instant it falls asleep, and switches it back on the instant it wakes — so the headphones paired to your phone stay yours all night.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="https://github.com/root913/bluenap/releases/latest">
+          ⌄ Get the latest build
+        </a>
+        <a class="btn" href="https://github.com/root913/bluenap">View source on GitHub</a>
+      </div>
+      <div class="hero-meta">
+        <span>macOS 13 Ventura or later</span>
+        <span>·</span>
+        <span>MIT licensed</span>
+        <span>·</span>
+        <span>Fork of Bluesnooze</span>
+      </div>
+    </div>
+
+    <div class="trace-wrap">
+      <div class="trace-header">
+        <span>bluetooth-controller.log</span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <svg class="trace-svg" viewBox="0 0 1200 220" preserveAspectRatio="none" role="img" aria-label="Diagram of Bluetooth activity: active while awake, flat while the Mac sleeps, active again on wake.">
+        <defs>
+          <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7fd8e8" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#7fd8e8" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#7fd8e8" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- baseline -->
+        <line x1="0" y1="110" x2="1200" y2="110" stroke="#1c273e" stroke-width="1"/>
+
+        <!-- awake pulses (left third) -->
+        <g class="pulse-glow" stroke="#7fd8e8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M0,110 L40,110 L55,60 L70,150 L85,80 L100,110 L160,110 L175,65 L190,145 L205,85 L220,110 L280,110 L295,60 L310,150 L325,80 L340,110 L400,110"/>
+        </g>
+
+        <!-- flat line during sleep (middle third) -->
+        <path d="M400,110 L800,110" stroke="#3a4358" stroke-width="2.5" fill="none" stroke-dasharray="1 10" stroke-linecap="round"/>
+        <text x="600" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5c667e" letter-spacing="1">ZZZ · BLUETOOTH POWERED OFF</text>
+
+        <!-- wake pulses (right third) -->
+        <g class="pulse-glow" stroke="#f2a65c" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:0s;">
+          <path d="M800,110 L840,110 L855,55 L870,155 L885,75 L900,110 L960,110 L975,60 L990,150 L1005,80 L1020,110 L1080,110 L1095,60 L1110,150 L1125,80 L1140,110 L1200,110"/>
+        </g>
+
+        <!-- moving playhead -->
+        <rect class="playhead" x="0" y="0" width="2" height="220" fill="url(#fade)"/>
+        <rect class="playhead" x="0" y="0" width="3" height="220" fill="#ecf0f7" opacity="0.9" style="animation-delay:0s;"/>
+      </svg>
+      <div class="trace-labels">
+        <div><strong>Awake</strong>Bluetooth on, business as usual</div>
+        <div><strong>Asleep</strong>BlueNap powers Bluetooth down</div>
+        <div><strong>Wake</strong>Instantly restored, no fumbling</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="tight" id="problem">
+  <div class="wrap problem-grid">
+    <div class="problem-copy">
+      <p class="eyebrow">The problem</p>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem); margin-top:14px;">The 3am handoff nobody asked for</h2>
+      <p>Pair the same headphones or speaker with your phone and your Mac, and a sleeping Mac becomes a rival. It can wake just enough to grab the Bluetooth connection mid-podcast, cutting your phone's audio for a beat while nothing on the Mac even needed it.</p>
+      <p>BlueNap listens for the sleep and wake notifications macOS already sends, and reacts to them directly — no polling, no background daemon guessing.</p>
+    </div>
+    <div class="device-swap">
+      <div class="swap-row"><span>iPhone → AirPods</span><span class="tag on">connected</span></div>
+      <div class="swap-row"><span>MacBook Pro → AirPods</span><span class="tag off">idle, asleep</span></div>
+      <div class="swap-row"><span>MacBook Pro Bluetooth</span><span class="tag off">powered off by BlueNap</span></div>
+      <div class="swap-row"><span>iPhone → AirPods</span><span class="tag on">stays connected</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Three states, one listener</h2>
+      <p>BlueNap runs quietly as a menu bar app and hooks into the same sleep/wake events macOS uses internally, toggling power through the system's own Bluetooth controller.</p>
+    </div>
+    <div class="states">
+      <div class="state">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="#7fd8e8" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 4-6 4V8z" fill="#7fd8e8" stroke="none"/></svg>
+        <h3>Awake</h3>
+        <p>Your Mac behaves normally. Bluetooth stays on and every paired accessory works exactly as it always has.</p>
+      </div>
+      <div class="state mid">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="#3a4358" stroke-width="1.6"><path d="M17 3a7 7 0 100 14 7.4 7.4 0 004.9-1.9A9 9 0 118.9 4.1 7 7 0 0117 3z" fill="#3a4358" stroke="none"/></svg>
+        <h3>Asleep</h3>
+        <p>The moment your Mac sleeps, BlueNap powers Bluetooth off entirely — or, if you've chosen specific devices, disconnects just those.</p>
+      </div>
+      <div class="state">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="#f2a65c" stroke-width="1.6"><circle cx="12" cy="12" r="5" fill="#f2a65c" stroke="none"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <h3>Wake</h3>
+        <p>On wake, BlueNap immediately restores whatever state Bluetooth was in before — no delay, no manual toggle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feature">
+  <div class="wrap feature-grid">
+    <div class="feature-col">
+      <p class="eyebrow">Selective disconnect</p>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem); margin-top:14px;">Keep Bluetooth on, lose only what's in the way</h2>
+      <p>Sometimes killing Bluetooth entirely is overkill — you might still want a Bluetooth keyboard or trackpad staying paired. Open <strong style="color:var(--ink);">Settings → Disconnect on sleep</strong> and tick the specific devices that should drop when your Mac sleeps.</p>
+      <ul class="feature-list">
+        <li>Select one or more devices and Bluetooth itself stays powered on — only those devices disconnect.</li>
+        <li>Leave nothing selected and BlueNap falls back to switching Bluetooth off completely.</li>
+        <li>Some accessories reconnect on their own initiative, so treat selective disconnect as best-effort with auto-reconnecting hardware.</li>
+      </ul>
+    </div>
+    <div class="shot-col">
+      <div class="shot-frame">
+        <img src="https://raw.githubusercontent.com/root913/bluenap/main/images/screenshot-settings.png" alt="BlueNap settings window showing the Disconnect on sleep device list" style="border-radius:6px; border:1px solid var(--line); display:block; width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap feature-grid reverse">
+    <div class="shot-col">
+      <div class="shot-frame">
+        <div class="crop-window">
+          <img src="https://raw.githubusercontent.com/root913/bluenap/main/images/screenshot.png" alt="BlueNap icon in the macOS menu bar with its dropdown open, showing Settings and Quit BlueNap">
+        </div>
+      </div>
+      <p class="shot-caption">Menu bar icon, open</p>
+    </div>
+    <div class="feature-col">
+      <p class="eyebrow">Lives in the menu bar</p>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem); margin-top:14px;">One icon, then it gets out of your way</h2>
+      <p>BlueNap sits in the menu bar as a small SwiftUI-native icon. Click it and a two-line menu drops down — Settings and Quit — nothing else to learn.</p>
+      <ul class="feature-list">
+        <li>Untick "Show menu bar icon" in Settings and it disappears immediately.</li>
+        <li>Relaunch the app any time (<code>open -a BlueNap</code>) and the icon returns with Settings open.</li>
+        <li>Optionally enable "Launch at login" so it's always watching from boot.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="install">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Install</p>
+      <h2>Up and running in a minute</h2>
+    </div>
+    <div class="install-grid">
+      <ol class="steps">
+        <li>
+          <div>
+            <h4>Get a build</h4>
+            <p>Download the latest release, or build it yourself from source with <code>make all</code>.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Move it to Applications</h4>
+            <p>Open <code>BlueNap.app</code> from your Applications folder like any other Mac app.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Turn on Launch at login</h4>
+            <p>Optional, from the Settings window — so BlueNap is watching from the moment you log in.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Sleep your Mac</h4>
+            <p>That's it. Bluetooth will power down on sleep and come back the moment you wake it.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div>
+        <div class="terminal">
+          <div class="tbar"><span></span><span></span><span></span><small>zsh — hide the icon</small></div>
+          <pre><span class="cmt"># hide the menu bar icon from Terminal</span>
+defaults write io.github.root913.bluenap <span class="accent">hideIcon</span> -bool true && killall BlueNap
+
+<span class="cmt"># bring it back — the icon is the only way to reopen Settings</span>
+defaults delete io.github.root913.bluenap <span class="accent">hideIcon</span> && killall BlueNap</pre>
+        </div>
+
+        <div class="caveats">
+          <p class="eyebrow">Worth knowing</p>
+          <ul>
+            <li>Not compatible with "Allow your Apple Watch to unlock your Mac" — that feature needs Bluetooth to stay live during sleep.</li>
+            <li>Can't ship on the App Store: BlueNap toggles Bluetooth power through a private macOS API.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2>Good to know</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary>Can I disconnect only some devices on sleep?</summary>
+        <div class="faq-body">
+          <p>Yes. Open Settings and tick the devices you want disconnected when your Mac sleeps. With at least one selected, Bluetooth itself stays on and only those devices drop; with none selected, BlueNap switches Bluetooth off entirely instead.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>How do I hide the BlueNap icon?</summary>
+        <div class="faq-body">
+          <p>Untick "Show menu bar icon" in Settings and it's gone right away. You can also do it from Terminal — see the snippet above.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>I hid the icon — how do I get Settings back?</summary>
+        <div class="faq-body">
+          <p>The icon is the only way to open Settings, so just relaunch the app with <code>open -a BlueNap</code>. The icon reappears and Settings opens automatically.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Does this work with any Bluetooth accessory?</summary>
+        <div class="faq-body">
+          <p>Most of them. A few devices, especially headphones, try to reconnect to a sleeping Mac on their own initiative, so selective disconnect is best-effort with hardware like that rather than a hard guarantee.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <p class="eyebrow">Ready when you are</p>
+        <h2 style="margin-top:10px;">Let your Mac's Bluetooth go quiet on cue.</h2>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-solid" href="https://github.com/root913/bluenap/releases/latest">Download latest release</a>
+        <a class="btn" href="https://github.com/root913/bluenap">Read the source</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>BlueNap is a fork of <a href="https://github.com/odlp/bluesnooze" style="color:var(--ink-dim);">Bluesnooze</a> by Oliver Drobnik, rebuilt in SwiftUI and extended with selective disconnect. MIT licensed.</p>
+    <div class="flinks">
+      <a href="https://github.com/root913/bluenap">GitHub</a>
+      <a href="https://github.com/root913/bluenap/issues">Issues</a>
+      <a href="https://github.com/root913/bluenap/blob/main/LICENSE">License</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
