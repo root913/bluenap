@@ -20,7 +20,7 @@ With BlueNap the Bluetooth connection is switched off when your Mac sleeps, and 
 
 ## Installation
 
-1. Build the release (`make all`), or grab a build from [Releases](https://github.com/root913/bluesnooze/releases/latest)
+1. Build the release (`make all`), or grab a build from [Releases](https://github.com/root913/bluenap/releases/latest)
 1. Open `BlueNap.app` in your `Applications` directory
 1. *Optional*: Enable 'Launch at login' from the Settings window
 
