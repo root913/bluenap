@@ -318,7 +318,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.root913.bluenap;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BlueNap/BlueNap-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -344,7 +344,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.root913.bluenap;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.root913.bluenap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BlueNap/BlueNap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

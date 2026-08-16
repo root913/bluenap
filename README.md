@@ -48,7 +48,7 @@ Note: some devices (e.g. headphones) may reconnect to a sleeping Mac on their ow
 In your terminal run the following command:
 
 ```sh
-defaults write dev.root913.bluenap hideIcon -bool true && killall BlueNap
+defaults write io.github.root913.bluenap hideIcon -bool true && killall BlueNap
 ```
 
 When you next relaunch the application there should be no icon in the menu bar.
@@ -58,7 +58,7 @@ When you next relaunch the application there should be no icon in the menu bar.
 In your terminal run the following command:
 
 ```sh
-defaults delete dev.root913.bluenap hideIcon && killall BlueNap
+defaults delete io.github.root913.bluenap hideIcon && killall BlueNap
 ```
 
 When you next relaunch the application it should appear in the menu bar.
